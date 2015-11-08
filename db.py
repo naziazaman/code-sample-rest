@@ -1,0 +1,100 @@
+import pymongo
+
+data_dict = [{"name": "Nike - Spilletr Classic III Blue/Red",
+                        "sizes": "6, 7, 9, 10, 12",
+                        "price": "134.00", "delivery": "5-14 days"},
+                       {"name": "Puma - Spilletr Vencida Blue/Brown",
+                        "sizes": "9, 10, 11, XL, XXL",
+                        "price": "99.00", "delivery": "1-2 days"},
+                       {"name": "Puma - Spilletr Blue/Brown",
+                        "sizes": "YXS/116 cm,YM/140 cm,YXL/164 cm",
+                        "price": "99.00", "delivery": "1-2 days"},
+                       {"name": "Puma - Shorts Vencida II Blue/Red",
+                        "sizes": "10, 12, XXS, XL",
+                        "price": "79.00", "delivery": "1-2 days"},
+                       {"name": "Adidas - AdiZero FG Blue/Red/Brown",
+                         "price": "97.00", "sizes": "6, 7, 9, 10", "delivery": "1-2 days"},
+                       {"name": "Macron - Spiller Raven",
+                        "sizes": "10, 14, XL", 
+                        "price": "135.00", "delivery": "4-8 days"},
+                       {"name": "Macron - Spiller Trend Brown",
+                        "sizes": "8, 10, 11, XXL, XS",
+                        "price": "229.00", "delivery": "4-8 days"},
+                       {"name": "Macron - Spiller Trend Red",
+                        "sizes": "8, 10, 12, XXL",
+                        "price": "229.00", "delivery": "4-8 days"},
+                       {"name": "Macron - Spiller Trend Navy Blue/Brown",
+                        "sizes": "6, 9, XL",
+                        "price": "229.00", "delivery": "4-8 days"},
+                       {"name": "Italien - Track Top 70 Italia Copa",
+                        "sizes": "6, 8, 9, 10, XS, XL, XXL",
+                        "price": "99.00", "delivery": "5-10 days"},
+                       {"name": "Puma - King Top DI FG ",
+                        "sizes": "6, 7, 8, 9, 10, 11",
+                        "price": "699.00", "delivery": "1-2 days"},
+                       {"name": "Nike - Supreme", "sizes": "XL",
+                        "price": "299.00", "delivery": "1-2 days"},
+                       {"name": "Nike - Vest",
+                        "sizes": "S/M, L/XL",
+                        "price": "29.00", "delivery": "5-14 days"},
+                       {"name": "Hummel - Polo Corporate Basic",
+                        "sizes": "XS, L, XL",
+                        "price": "129.00", "delivery": "5-10 days"},
+                       {"name": "Nike - Spilletr Classic III Brwon/Red",
+                        "sizes": "10, 14, XL, XXL",
+                        "price": "134.00", "delivery": "5-14 days"},
+                       {"name": "Football Socks Italia Sort",
+                        "sizes": "28-32, 33-36, 37-41, 42-47",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Football Socks Italia White",
+                        "sizes": "28-32, 33-36, 37-41, 42-47",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Football Socks Italia Blue",
+                        "sizes": "28-32, 33-36, 37-41, 42-47",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Football Socks Italia Green",
+                        "sizes": "28-32, 33-36, 37-41, 42-47",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Football Socks Italia Light Blue",
+                        "sizes": "28-32, 33-36, 37-41, 42-47",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Football Socks Italia Navy",
+                        "sizes": "28-32, 33-36, 37-41, 42-47",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Football Socks Italia Red",
+                        "sizes": "28-32, 33-36, 37-41, 42-47",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Football Socks Italia Blue/White",
+                        "sizes": "28-32, 33-36, 37-41",
+                        "price": "59.00", "delivery": "4-8 days"},
+                       {"name": "Macron - Spilles\u00e6t Raven White/Sort",
+                        "sizes": "S, M",
+                        "price": "199.00", "delivery": "4-8 days"},
+                       {"name": "Hat",
+                        "sizes": "One Size Adult",
+                        "price": "49.00", "delivery": "1-2 days"},
+                       {"name": "Nike - Shorts Woven Dame Red",
+                        "sizes": "XS, S, L, XL",
+                        "price": "149.00", "delivery": "5-14 days"},
+                       {"name": "Hummel - Shorts Basic Red",
+                        "sizes": "12",
+                        "price": "79.00", "delivery": "1-2 days"},
+                       {"name": "Nike - T-Shirt Mercurial Styler Pink",
+                        "sizes": "S, M, L, XL",
+                        "price": "211.00", "delivery": "1-2 days"}]
+
+def load_data():
+    connection_string = "mongodb://localhost:27017"
+    client = pymongo.MongoClient(connection_string)
+    db = client.product_database
+    collection = db.product_collection
+
+    products = db.products
+
+    for d in data_dict:
+        d['price'] = float(d['price'])
+        _id = products.insert(d)
+        print 'inserted ', _id
+
+if __name__ == '__main__':
+    load_data()
